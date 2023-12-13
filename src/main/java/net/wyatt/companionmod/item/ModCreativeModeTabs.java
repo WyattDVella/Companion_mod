@@ -17,7 +17,7 @@ public class ModCreativeModeTabs {
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.SPEEDRUNNER.get()))
                     .title(Component.translatable("creativetab.companion_tab"))
                     .displayItems((pParameters, pOutput) -> {
-                        pOutput.accept(ModItems.SPEEDRUNNER.get());
+                        pOutput.accept(ModItems.SPEEDRUNNER.get() );
                     })
                     .build());
 
