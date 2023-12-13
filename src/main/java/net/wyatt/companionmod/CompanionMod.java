@@ -1,6 +1,7 @@
 package net.wyatt.companionmod;
 
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -12,6 +13,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.wyatt.companionmod.entity.ModEntities;
+import net.wyatt.companionmod.entity.client.SpeedrunnerRenderer;
+import net.wyatt.companionmod.item.ModCreativeModeTabs;
 import net.wyatt.companionmod.item.ModItems;
 import org.slf4j.Logger;
 
@@ -22,7 +26,9 @@ public class CompanionMod {
     public CompanionMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        ModCreativeModeTabs.register(modEventBus);
         ModItems.register(modEventBus);
+        ModEntities.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 
@@ -49,7 +55,7 @@ public class CompanionMod {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-
+            EntityRenderers.register(ModEntities.SPEEDRUNNER.get(), SpeedrunnerRenderer::new);
         }
     }
 }
